@@ -1,7 +1,11 @@
 '''
 inference
 '''
-import tensorflow as tf
+#import tensorflow as tf
+# Fix for TF1
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 import numpy as np
 # import keras
 from model.models_network import backbone_network
@@ -13,9 +17,11 @@ from utils.load_data import read_from_nii, save_pred_to_nii
 import os
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-tf.Session(config=config)
+# config = tf.ConfigProto()
+# config = tf.compat.v1.ConfigProto()
+
+# config.gpu_options.allow_growth = True
+# tf.Session(config=config)
 
 
 def inference_pipeline(nii_filename='',

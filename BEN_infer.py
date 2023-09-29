@@ -3,7 +3,9 @@ from utils.inference import inference_pipeline
 import os
 import logging
 import warnings
-import tensorflow as tf
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 warnings.filterwarnings("ignore")
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # tf log errors only
@@ -32,7 +34,7 @@ if __name__ == '__main__':
 
     ''' Run inference '''
     inference_pipeline(args.input, args.output, weight=args.weight, BN_list=args.BN_list,
-                       check_orientation=args.check_orientation, is_mkdir=args.is_mkdir)
+                       check_orientation=args.check_orientation, is_mkdir=args.is_mkdir, max_num=10)
 
     ''' (Optional) Run post-processing '''
     # from utils.postprocess import remove_small_objects_v1
